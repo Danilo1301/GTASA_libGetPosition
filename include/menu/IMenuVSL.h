@@ -5,6 +5,7 @@
 #include <map>
 
 #include "SimpleGTA.h"
+#include "MenuStructs.h"
 
 #include "IWindow.h"
 #include "IDebug.h"
@@ -50,4 +51,22 @@ public:
     virtual void SetFontScale(float sx, float sy) = 0;
     virtual CVector2D GetFontScale() = 0;
     virtual void ResetFontScale() = 0;
+
+    /*1.3.0*/
+
+    virtual void AddOnVehicleRenderBefore(std::function<void(void*)> fn) = 0;
+    virtual void AddOnVehicleRenderAfter(std::function<void(void*)> fn) = 0;
+    virtual void AddOnUpdate(std::function<void()> fn) = 0;
+    virtual void AddOnProcessScripts(std::function<void()> fn) = 0;
+    virtual std::vector<MVehicle> GetVehicles() = 0;
+
+    virtual void DrawRectWithStringMultiline(std::string text, CVector2D pos, float width, CVector2D padding, CRGBA boxColor, CRGBA textColor, eFontAlignment align) = 0;
+    virtual void ShowPopup(std::string title, std::string text, CVector2D pos, int time) = 0;
+
+    // default value for drawWithFixedScale is true
+    // using false is usefull with ConvertWorldPositionToScreenPosition
+    virtual void SetDrawWithFixedScale(bool enabled) = 0;
+
+    virtual IWindow* AddVector2Window(IWindow* parent, CVector2D* vec, float min, float max, float addBy) = 0;
+    virtual IWindow* AddVectorWindow(IWindow* parent, CVector* vec, float min, float max, float addBy) = 0;
 };
