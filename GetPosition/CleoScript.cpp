@@ -59,19 +59,19 @@ void CleoScript::CreateMenu()
     window->AddText("- Position will be saved at:", CRGBA(255, 255, 255));
     window->AddText("- /configs/getPosition/", CRGBA(255, 255, 255));
 
-    auto savePlayerPos = window->AddButton("> ~y~Save player position", CRGBA(255, 255, 255));
+    auto savePlayerPos = window->AddButton("> ~y~Save player position");
     savePlayerPos->onClick = [window]() {
         SavePlayerPos();
         window->SetToBeRemoved();
     };
 
-    auto saveVehiclePos = window->AddButton("> ~y~Save vehicle position", CRGBA(255, 255, 255));
+    auto saveVehiclePos = window->AddButton("> ~y~Save vehicle position");
     saveVehiclePos->onClick = [window]() {
         SaveVehiclePos();
         window->SetToBeRemoved();
     };
 
-    auto close = window->AddButton("> ~r~Close", CRGBA(255, 255, 255));
+    auto close = window->AddButton("> ~r~Close");
     close->onClick = [window]() {
         window->SetToBeRemoved();
     };
