@@ -41,15 +41,17 @@ void CleoScript::CreateMenu()
 
     auto vehiclePosition = window->AddText("", CRGBA(255, 255, 255));
     vehiclePosition->onUpdate = [vehiclePosition]() {
-        auto position = CVector(0, 0, 0);
+       
         auto playerActor = GetPlayerActor();
         auto vehicleHandle = GetVehiclePedIsUsing(playerActor);
 
-        if(vehicleHandle)
+        if(!vehicleHandle)
         {
-            position = GetCarPosition(vehicleHandle);
+            vehiclePosition->m_Text = "Vehicle position: UNKNOWN";
+            return;
         }
-
+        
+        auto position = GetCarPosition(vehicleHandle);
         vehiclePosition->m_Text = "Vehicle position: " + std::to_string((int)position.x) + ", " + std::to_string((int)position.y) + ", " + std::to_string((int)position.z);
     };
 
@@ -97,15 +99,12 @@ void CleoScript::SaveVehiclePos()
     char path[512];
 	sprintf(path, "%s/getPosition/savedpositions.txt", aml->GetConfigPath());
 
-    auto position = CVector(0, 0, 0);
     auto playerActor = GetPlayerActor();
     auto vehicleHandle = GetVehiclePedIsUsing(playerActor);
+    
+    if(!vehicleHandle) return;
 
-    if(vehicleHandle)
-    {
-        position = GetCarPosition(vehicleHandle);
-    }
-
+    auto position = GetCarPosition(vehicleHandle);
     auto angle = GET_CAR_Z_ANGLE(vehicleHandle);
     auto modelId = GET_CAR_MODEL(vehicleHandle);
     std::string remap = "";

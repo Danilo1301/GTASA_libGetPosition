@@ -5,6 +5,6 @@
 :MAIN
 03A4: name_thread "GetPosition"
 
-0FF0: set_global_int_variable "show_menu_getPosition" value 1
+4D80: set_global_int_variable "show_menu_getPosition" value 1
 
 004E: terminate_this_script
