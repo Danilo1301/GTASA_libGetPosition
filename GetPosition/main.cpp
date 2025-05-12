@@ -9,7 +9,7 @@
 
 // ---------------------------------------
 
-MYMODCFG(net.danilo1301.getPosition, Get Position, 1.0.0, Danilo1301)
+MYMODCFG(net.danilo1301.getPosition, Get Position, 1.0.1, Danilo1301)
 
 // ---------------------------------------
 
@@ -69,6 +69,18 @@ extern "C" void OnModLoad()
     LoadInterface(&scriptCommands, "ScriptCommands");
     LoadInterface(&menuVSL, "MenuVSL");
     LoadInterface(&multiRemap, "MultiRemap");
+
+    if(!menuVSL)
+    {
+        Log::Level(eLogLevel::LOG_BOTH) << "Error: MenuVSL not found!" << std::endl;
+        return;
+    }
+
+    if(!scriptCommands)
+    {
+        Log::Level(eLogLevel::LOG_BOTH) << "Error: ScriptCommands not found!" << std::endl;
+        return;
+    }
 
     Log::Level(eLogLevel::LOG_BOTH) << "Loading addresses..." << std::endl;
     

@@ -19,14 +19,11 @@ void CleoScript::OnFirstUpdate()
 
 void CleoScript::OnUpdate()
 {
-    if(menuVSL)
+    if(menuVSL->GetGlobalIntVariable("show_menu_getPosition") == 1)
     {
-        if(menuVSL->GetGlobalIntVariable("show_menu_getPosition") == 1)
-        {
-            menuVSL->SetGlobalIntVariable("show_menu_getPosition", 0);
+        menuVSL->SetGlobalIntVariable("show_menu_getPosition", 0);
 
-            CreateMenu();
-        }
+        CreateMenu();
     }
 }
 
